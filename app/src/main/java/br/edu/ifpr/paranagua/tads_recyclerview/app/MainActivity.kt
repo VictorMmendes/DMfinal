@@ -1,32 +1,25 @@
 package br.edu.ifpr.paranagua.tads_recyclerview.app
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.Toast
 import br.edu.ifpr.paranagua.tads_recyclerview.R
-import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Tarefa
-import br.edu.ifpr.paranagua.tads_recyclerview.remoto.dao.TarefaDaoRemoto
-import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.BuscaTodasTarefasService
-import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.TarefaRemotaListener
-import br.edu.ifpr.paranagua.tads_recyclerview.ui.TarefasAdapter
+import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Animal
+import br.edu.ifpr.paranagua.tads_recyclerview.remoto.dao.AnimalDaoRemoto
+import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.animais.BuscaTodosAnimaisListener
+import br.edu.ifpr.paranagua.tads_recyclerview.ui.AnimaisAdapter
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
-class MainActivity : AppCompatActivity(), TarefaRemotaListener {
-    override fun onBuscaTarefasReturn(tarefas: List<Tarefa>) {
-        listTarefas.adapter = TarefasAdapter(tarefas)
+class MainActivity : AppCompatActivity(), BuscaTodosAnimaisListener {
+
+    override fun onBuscaTodosAnimaisReturn(animais: List<Animal>) {
+        listAnimais.adapter = AnimaisAdapter(animais)
     }
 
-    override fun onBuscaTodasReturn(tarefas: List<Tarefa>) {
-        listTarefas.adapter = TarefasAdapter(tarefas)
-    }
-
-    override fun onTarefaError(mensagem: String) {
-
+    override fun onBuscaTodosAnimaisError(mensagem: String) {
+        Toast.makeText(this, "ERRO: $mensagem", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,29 +29,24 @@ class MainActivity : AppCompatActivity(), TarefaRemotaListener {
         val layout = LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false)
 
-        listTarefas.layoutManager = layout
+        listAnimais.layoutManager = layout
 
-        carregarTarefas(TarefaDaoRemoto.TipoBusca.TODAS)
+        carregarAnimais()
 
         btRegarregar.setOnClickListener {
-            carregarTarefas(TarefaDaoRemoto.TipoBusca.PRONTAS)
+            carregarAnimais()
         }
 
         btInserir.setOnClickListener {
-            var dao = TarefaDaoRemoto(this)
-            var tarefa = Tarefa(
-                    "Inserida do Botão",
-                    "Descrição",
-                    true
-            )
-            dao.inserir(tarefa)
+            val intent = Intent(this, FormActivity::class.java)
+            startActivity(intent)
         }
+
     }
 
-    fun carregarTarefas(tipo: TarefaDaoRemoto.TipoBusca) {
-        var dao = TarefaDaoRemoto(this)
-//        dao.buscarTodas()
-
-        dao.buscarTarefas(tipo)
+    private fun carregarAnimais() {
+        var dao = AnimalDaoRemoto()
+        dao.buscaTodosAnimaisListener = this
+        dao.buscarTodos()
     }
 }
