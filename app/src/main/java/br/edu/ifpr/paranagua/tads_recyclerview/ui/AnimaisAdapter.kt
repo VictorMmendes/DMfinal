@@ -12,9 +12,13 @@ import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Animal
 import kotlinx.android.synthetic.main.animal_item.view.*
 import java.text.SimpleDateFormat
 
-class AnimaisAdapter(val animais: List<Animal>) :
+class AnimaisAdapter(val animais: List<Animal>, val listener: AnimaisAdapterListener?) :
         RecyclerView.Adapter<AnimaisAdapter.ViewHolder>() {
     private var context: Context? = null
+
+    interface AnimaisAdapterListener {
+        fun onAnimalSelected(animal: Animal)
+    }
 
     override fun onCreateViewHolder(
             parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -51,10 +55,12 @@ class AnimaisAdapter(val animais: List<Animal>) :
             itemView.txtPorte.text = animal.porte.toString()
 
             itemView.setOnClickListener {
-                val intent = Intent(context, FormActivity::class.java)
-                intent.putExtra("id", animal.id)
-                TODO("TERMINAR")
-                context?.startActivity(intent)
+//                val intent = Intent(context, FormActivity::class.java)
+//                intent.putExtra("id", animal.id)
+//                TODO("TERMINAR")
+//                context?.startActivity(intent)
+
+                listener?.onAnimalSelected(animal)
             }
         }
     }

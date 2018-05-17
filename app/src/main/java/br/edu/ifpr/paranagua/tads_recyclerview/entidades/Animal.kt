@@ -1,6 +1,7 @@
 package br.edu.ifpr.paranagua.tads_recyclerview.entidades
 
 import br.edu.ifpr.paranagua.tads_recyclerview.remoto.entidades.AnimalRemoto
+import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -10,7 +11,7 @@ data class Animal(var id: Int?,
                   var raca: String,
                   var peso: Float,
                   var nascimento: Date,
-                  var porte: Tamanho) {
+                  var porte: Tamanho) : Serializable {
 
     enum class Tamanho {
         P, M, G

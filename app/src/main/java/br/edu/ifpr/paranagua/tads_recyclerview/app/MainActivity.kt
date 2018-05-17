@@ -1,5 +1,6 @@
 package br.edu.ifpr.paranagua.tads_recyclerview.app
 
+import android.app.Fragment
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -12,41 +13,31 @@ import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.animais.BuscaTodo
 import br.edu.ifpr.paranagua.tads_recyclerview.ui.AnimaisAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), BuscaTodosAnimaisListener {
+class MainActivity : AppCompatActivity(), MainFragment.MainFragmentListener {
+    override fun onAnimalSelected(animal: Animal) {
+        val fragment = DetailFragment.newInstance(animal)
+        val t = supportFragmentManager.beginTransaction()
 
-    override fun onBuscaTodosAnimaisReturn(animais: List<Animal>) {
-        listAnimais.adapter = AnimaisAdapter(animais)
+        if (isLandscape())
+            t.replace(R.id.frameDetail, fragment)
+        else {
+            t.replace(R.id.frameMain, fragment)
+            t.addToBackStack(null)
+        }
+
+        t.commit()
     }
 
-    override fun onBuscaTodosAnimaisError(mensagem: String) {
-        Toast.makeText(this, "ERRO: $mensagem", Toast.LENGTH_SHORT).show()
-    }
+    private fun isLandscape() = resources.getBoolean(R.bool.landscape)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val layout = LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL, false)
+        val fragment = MainFragment.newInstance()
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.frameMain, fragment)
+                .commit()
 
-        listAnimais.layoutManager = layout
-
-        carregarAnimais()
-
-        btRegarregar.setOnClickListener {
-            carregarAnimais()
-        }
-
-        btInserir.setOnClickListener {
-            val intent = Intent(this, FormActivity::class.java)
-            startActivity(intent)
-        }
-
-    }
-
-    private fun carregarAnimais() {
-        var dao = AnimalDaoRemoto()
-        dao.buscaTodosAnimaisListener = this
-        dao.buscarTodos()
     }
 }
