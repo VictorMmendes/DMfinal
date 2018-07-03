@@ -8,65 +8,48 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/txtNome"
-            android:layout_width="match_parent"
+            android:id="@+id/txtDescricao"
+            android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_marginRight="120dp"
             android:text="txtNome"
             android:textAlignment="center"
-            android:textColor="#ca0101"
-            android:textSize="25sp" />
+            android:textSize="16sp"
+            android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/txtEspecie"
+            android:id="@+id/txtRepeticao"
+            android:layout_width="119dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/txtDescricao"
+            android:layout_centerHorizontal="true"
+            android:text="txtPeso"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/textPeso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/txtRepeticao"
+            android:text="TextView"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listModificacoes"
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/txtNome"
-            android:layout_marginLeft="17dp"
-            android:layout_marginStart="17dp"
-            android:text="txtEspecie"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/txtRaca"
-            android:layout_width="352dp"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/txtEspecie"
-            android:layout_below="@+id/txtEspecie"
-            android:text="txtRaca" />
-
-        <TextView
-            android:id="@+id/txtPeso"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/txtEspecie"
-            android:layout_below="@+id/txtRaca"
-            android:text="txtPeso" />
-
-        <TextView
-            android:id="@+id/txtNascimento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/txtEspecie"
-            android:layout_below="@+id/txtPeso"
-            android:text="txtNascimento" />
-
-        <TextView
-            android:id="@+id/txtPorte"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/txtEspecie"
-            android:layout_below="@+id/txtNascimento"
-            android:text="txtPorte" />
-
+            android:layout_height="match_parent"
+        />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

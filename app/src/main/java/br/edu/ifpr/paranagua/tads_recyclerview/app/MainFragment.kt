@@ -1,7 +1,6 @@
 package br.edu.ifpr.paranagua.tads_recyclerview.app
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -11,23 +10,23 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import br.edu.ifpr.paranagua.tads_recyclerview.R
-import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Animal
-import br.edu.ifpr.paranagua.tads_recyclerview.remoto.dao.AnimalDaoRemoto
-import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.animais.BuscaTodosAnimaisListener
-import br.edu.ifpr.paranagua.tads_recyclerview.ui.AnimaisAdapter
+import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Exercicio
+import br.edu.ifpr.paranagua.tads_recyclerview.remoto.dao.ExercicioDaoRemoto
+import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.exercicios.BuscaTodosExerciciosListener
+import br.edu.ifpr.paranagua.tads_recyclerview.ui.ExerciciosAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
-class MainFragment : Fragment(), BuscaTodosAnimaisListener, AnimaisAdapter.AnimaisAdapterListener {
-    override fun onAnimalSelected(animal: Animal) {
-        listener?.onAnimalSelected(animal)
+class MainFragment : Fragment(), BuscaTodosExerciciosListener, ExerciciosAdapter.ExerciciosAdapterListener {
+    override fun onExercicioSelected(exercicio: Exercicio) {
+        listener?.onExercicioSelected(exercicio)
     }
 
-    override fun onBuscaTodosAnimaisReturn(animais: List<Animal>) {
-        listAnimais?.adapter = AnimaisAdapter(animais, this)
+    override fun onBuscaTodosExerciciosReturn(exercicios: List<Exercicio>) {
+        listExercicios?.adapter = ExerciciosAdapter(exercicios, this)
     }
 
-    override fun onBuscaTodosAnimaisError(mensagem: String) {
+    override fun onBuscaTodosExerciciosError(mensagem: String) {
         Toast.makeText(context, "ERRO: $mensagem", Toast.LENGTH_SHORT).show()
     }
 
@@ -39,7 +38,7 @@ class MainFragment : Fragment(), BuscaTodosAnimaisListener, AnimaisAdapter.Anima
 
         val layout = LinearLayoutManager(context,
                 LinearLayoutManager.VERTICAL, false)
-        view.listAnimais.layoutManager = layout
+        view.listExercicios.layoutManager = layout
 
         carregarAnimais()
 
@@ -47,7 +46,7 @@ class MainFragment : Fragment(), BuscaTodosAnimaisListener, AnimaisAdapter.Anima
     }
 
 //    fun onButtonPressed(uri: Uri) {
-//        listener?.onAnimalSelected(uri)
+//        listener?.onExercicioSelected(uri)
 //    }
 
     override fun onAttach(context: Context) {
@@ -65,7 +64,7 @@ class MainFragment : Fragment(), BuscaTodosAnimaisListener, AnimaisAdapter.Anima
     }
 
     interface MainFragmentListener {
-        fun onAnimalSelected(animal: Animal)
+        fun onExercicioSelected(exercicio: Exercicio)
     }
 
     companion object {
@@ -74,8 +73,8 @@ class MainFragment : Fragment(), BuscaTodosAnimaisListener, AnimaisAdapter.Anima
     }
 
     private fun carregarAnimais() {
-        var dao = AnimalDaoRemoto()
-        dao.buscaTodosAnimaisListener = this
+        var dao = ExercicioDaoRemoto()
+        dao.buscaTodosExerciciosListener = this
         dao.buscarTodos()
     }
 }

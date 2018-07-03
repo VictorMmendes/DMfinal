@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tads-fragments.iml" filepath="$PROJECT_DIR$/tads-fragments.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tadsrecyclerview.iml" filepath="$PROJECT_DIR$/tadsrecyclerview.iml" />
     </modules>
   </component>
 </project>

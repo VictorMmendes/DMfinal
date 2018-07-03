@@ -1,21 +1,13 @@
 package br.edu.ifpr.paranagua.tads_recyclerview.app
 
-import android.app.Fragment
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.widget.Toast
 import br.edu.ifpr.paranagua.tads_recyclerview.R
-import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Animal
-import br.edu.ifpr.paranagua.tads_recyclerview.remoto.dao.AnimalDaoRemoto
-import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.animais.BuscaTodosAnimaisListener
-import br.edu.ifpr.paranagua.tads_recyclerview.ui.AnimaisAdapter
-import kotlinx.android.synthetic.main.activity_main.*
+import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Exercicio
 
 class MainActivity : AppCompatActivity(), MainFragment.MainFragmentListener {
-    override fun onAnimalSelected(animal: Animal) {
-        val fragment = DetailFragment.newInstance(animal)
+    override fun onExercicioSelected(exercicio: Exercicio) {
+        val fragment = DetailFragment.newInstance(exercicio)
         val t = supportFragmentManager.beginTransaction()
 
         if (isLandscape())
@@ -33,6 +25,7 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         val fragment = MainFragment.newInstance()
         supportFragmentManager.beginTransaction()

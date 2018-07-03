@@ -1,27 +1,47 @@
 package br.edu.ifpr.paranagua.tads_recyclerview.app
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import br.edu.ifpr.paranagua.tads_recyclerview.R
-import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Animal
+import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Exercicio
+import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Modificacao
+import br.edu.ifpr.paranagua.tads_recyclerview.remoto.dao.ModificacaoDaoRemoto
+import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.exercicios.BuscaTodasModificacoesListener
+import br.edu.ifpr.paranagua.tads_recyclerview.ui.ModificacoesAdapter
+import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.fragment_detail.view.*
 import java.text.SimpleDateFormat
 
-private const val ARG_ANIMAL = "animal"
+private const val ARG_EXERCICIO = "exercicio"
 
-class DetailFragment : Fragment() {
-    private var animal: Animal? = null
+class DetailFragment : Fragment(), BuscaTodasModificacoesListener, ModificacoesAdapter.ModificacoesAdapterListener {
+    override fun onModificacaoSelected(modificacao: Modificacao)
+    {
+
+    }
+
+    override fun onBuscaTodasModificacoesReturn(modificacoes: List<Modificacao>)
+    {
+        listModificacoes?.adapter = ModificacoesAdapter(modificacoes, this)
+    }
+
+    override fun onBuscaTodasModificacoesError(mensagem: String)
+    {
+        Toast.makeText(context, "ERRO: $mensagem", Toast.LENGTH_SHORT).show()
+    }
+
+    private var exercicio: Exercicio? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            animal = it.getSerializable(ARG_ANIMAL) as Animal
+            exercicio = it.getSerializable(ARG_EXERCICIO) as Exercicio
         }
     }
 
@@ -29,25 +49,32 @@ class DetailFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_detail, container, false)
 
-        val f = SimpleDateFormat("dd/mm/yyyy")
+        view.txtDescricao.text = exercicio?.descricao
+        view.txtRepeticao.text = exercicio?.repeticao
+        view.textPeso.text = "${exercicio?.peso.toString() + "Kg"}"
 
-        view.txtNome.text = animal?.nome
-        view.txtEspecie.text = animal?.especie
-        view.txtRaca.text = animal?.raca
-        view.txtPeso.text = animal?.peso.toString()
-        view.txtNascimento.text = f.format(animal?.nascimento)
-        view.txtPorte.text = animal?.porte.toString()
+        val layout = LinearLayoutManager(context,
+                LinearLayoutManager.VERTICAL, false)
+        view.listModificacoes.layoutManager = layout
+
+        carregarModificacoes()
 
         return view
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(animal: Animal) =
+        fun newInstance(exercicio: Exercicio) =
                 DetailFragment().apply {
                     arguments = Bundle().apply {
-                        putSerializable(ARG_ANIMAL, animal)
+                        putSerializable(ARG_EXERCICIO, exercicio)
                     }
                 }
+    }
+
+    private fun carregarModificacoes() {
+        var dao = ModificacaoDaoRemoto()
+        dao.buscaTodasModificacoesListener = this
+        dao.buscarTodos(exercicio?.id)
     }
 }

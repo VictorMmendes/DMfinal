@@ -7,115 +7,71 @@
     tools:context=".app.FormActivity">
 
     <TextView
-        android:id="@+id/Nome"
+        android:id="@+id/descricao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Nome" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:text="Descrição" />
 
     <EditText
-        android:id="@+id/txtNome"
+        android:id="@+id/txtDescricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/Nome"
+        android:layout_below="@+id/descricao"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
-
-    <TextView
-        android:id="@+id/especie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtNome"
-        android:text="Espécie" />
-
-    <EditText
-        android:id="@+id/txtEspecie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/especie"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
-
-    <TextView
-        android:id="@+id/raca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtEspecie"
-        android:text="Raça" />
-
-    <EditText
-        android:id="@+id/txtRaca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/raca"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtRaca"
-        android:text="Peso" />
-
-    <EditText
-        android:id="@+id/txtPeso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView6"
-        android:ems="10"
-        android:inputType="number" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtPeso"
-        android:text="Data de Nascimento" />
-
-    <EditText
-        android:id="@+id/txtNascimento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView7"
-        android:ems="10"
-        android:inputType="date" />
+        android:inputType="text"
+        android:layout_marginTop="20dp"
+        android:hint=" Descreva o exercício" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtNascimento"
-        android:text="Porte" />
+        android:layout_below="@+id/txtDescricao"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Repetições" />
 
     <EditText
-        android:id="@+id/txtPorte"
-        android:layout_width="wrap_content"
+        android:id="@+id/txtRepeticao"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView8"
         android:ems="10"
-        android:inputType="number" />
+        android:inputType="text"
+        android:layout_marginTop="20dp"
+        android:hint=" Descreva o exercício" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtRepeticao"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Peso" />
+
+    <EditText
+        android:id="@+id/txtPeso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView9"
+        android:ems="10"
+        android:inputType="number"
+        android:layout_marginTop="20dp"
+        android:hint=" Digite a quantidade de peso"/>
 
     <Button
         android:id="@+id/btSalvar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtPorte"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/txtPeso"
+        android:layout_marginTop="20dp"
         android:text="Salvar" />
 </RelativeLayout>
