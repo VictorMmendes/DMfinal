@@ -20,11 +20,19 @@ class ExercicioDaoRemoto {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-    fun buscarTodos() {
+    fun buscarTodos(query: String) {
         var service =
                 retrofit.create(ExercicioService::class.java)
 
-        var call = service.buscaTodos()
+
+        var busca = query
+
+        if(busca == "")
+        {
+            busca = "@"
+        }
+
+        var call = service.buscaTodos(busca)
 
         call.enqueue(object: Callback<List<ExercicioRemoto>> {
             override fun onFailure(call: Call<List<ExercicioRemoto>>?,

@@ -27,11 +27,6 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentListener {
         t.commit()
     }
 
-    override fun onBackPressed()
-    {
-        moveTaskToBack(true)
-    }
-
     private fun isLandscape() = resources.getBoolean(R.bool.landscape)
 
     override fun onCreate(savedInstanceState: Bundle?) {

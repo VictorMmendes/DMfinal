@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
 
 import br.edu.ifpr.paranagua.tads_recyclerview.R
@@ -17,7 +18,19 @@ import br.edu.ifpr.paranagua.tads_recyclerview.ui.ExerciciosAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
-class MainFragment : Fragment(), BuscaTodosExerciciosListener, ExerciciosAdapter.ExerciciosAdapterListener {
+class MainFragment : Fragment(), BuscaTodosExerciciosListener, ExerciciosAdapter.ExerciciosAdapterListener, SearchView.OnQueryTextListener {
+    override fun onQueryTextSubmit(p0: String?): Boolean
+    {
+        val searchString = "%${searchTf.query}%"
+        return carregarAnimais(searchString)
+    }
+
+    override fun onQueryTextChange(p0: String?): Boolean
+    {
+        val searchString = "%${searchTf.query}%"
+        return carregarAnimais(searchString)
+    }
+
     override fun onExercicioSelected(exercicio: Exercicio) {
         listener?.onExercicioSelected(exercicio)
     }
@@ -40,18 +53,22 @@ class MainFragment : Fragment(), BuscaTodosExerciciosListener, ExerciciosAdapter
                 LinearLayoutManager.VERTICAL, false)
         view.listExercicios.layoutManager = layout
 
+        view.searchTf.setOnQueryTextListener(this)
+
         view.addBt.setOnClickListener({
             listener?.onAddBtClicked()
         })
 
-        carregarAnimais()
+        carregarAnimais("")
 
         return view
     }
 
-//    fun onButtonPressed(uri: Uri) {
-//        listener?.onExercicioSelected(uri)
-//    }
+    override fun onResume()
+    {
+        super.onResume()
+        carregarAnimais("")
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -77,9 +94,10 @@ class MainFragment : Fragment(), BuscaTodosExerciciosListener, ExerciciosAdapter
         fun newInstance() = MainFragment()
     }
 
-    private fun carregarAnimais() {
+    private fun carregarAnimais(query: String): Boolean {
         var dao = ExercicioDaoRemoto()
         dao.buscaTodosExerciciosListener = this
-        dao.buscarTodos()
+        dao.buscarTodos(query)
+        return true
     }
 }

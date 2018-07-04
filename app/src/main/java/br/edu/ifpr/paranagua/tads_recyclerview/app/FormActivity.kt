@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_form.*
 class FormActivity : AppCompatActivity(), InserirAtualizarExercicioListener {
     override fun onInserirAtualizarExercicioReturn(str: String) {
         Toast.makeText(this, "$str", Toast.LENGTH_SHORT).show()
-        val intent = Intent(this, FormActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 

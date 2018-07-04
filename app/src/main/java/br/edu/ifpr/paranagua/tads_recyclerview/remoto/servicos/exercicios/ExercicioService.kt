@@ -5,8 +5,8 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface ExercicioService {
-    @GET("exercicios.json")
-    fun buscaTodos(): Call<List<ExercicioRemoto>>
+    @GET("exercicios.json/{query}")
+    fun buscaTodos(@Path("query") query: String): Call<List<ExercicioRemoto>>
 
     @GET("insert.json/{description}&{repeats}&{weight}")
     fun inserir(

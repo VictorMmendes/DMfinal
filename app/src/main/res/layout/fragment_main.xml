@@ -39,7 +39,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:queryHint=" Pesquisar 'Ralf'"
+                android:queryHint=" Pesquisar 'Supino Reto'"
                 android:ems="10" />
         </RelativeLayout>
 
