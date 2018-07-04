@@ -29,7 +29,7 @@ class ExercicioDaoRemoto {
         call.enqueue(object: Callback<List<ExercicioRemoto>> {
             override fun onFailure(call: Call<List<ExercicioRemoto>>?,
                                    t: Throwable?) {
-                buscaTodosExerciciosListener?.onBuscaTodosExerciciosError("Não foi possível conectar com o WebService")
+                buscaTodosExerciciosListener?.onBuscaTodosExerciciosError("Connection couldn't be established")
             }
 
             override fun onResponse(call: Call<List<ExercicioRemoto>>?,
@@ -58,17 +58,16 @@ class ExercicioDaoRemoto {
                 exercicioRemoto.weight
         )
 
-        call.enqueue(object: Callback<ExercicioRemoto> {
-            override fun onFailure(call: Call<ExercicioRemoto>?,
+        call.enqueue(object: Callback<String> {
+            override fun onFailure(call: Call<String>?,
                                    t: Throwable?) {
-                inserirAtualizarExercicioListener?.onInserirAtualizarExercicioError("Wasn't possible to connect to WebService")
+                inserirAtualizarExercicioListener?.onInserirAtualizarExercicioError("Connection couldn't be established")
             }
 
-            override fun onResponse(call: Call<ExercicioRemoto>?,
-                                    response: Response<ExercicioRemoto>?) {
-                var exercicioRemoto = response?.body()!!
+            override fun onResponse(call: Call<String>?,
+                                    response: Response<String>?) {
 //                inserirAtualizarExercicioListener?.onInserirAtualizarExercicioReturn(exercicioRemoto.toExercicio())
-                inserirAtualizarExercicioListener?.onInserirAtualizarExercicioError("ate que deu")
+                inserirAtualizarExercicioListener?.onInserirAtualizarExercicioReturn("Registered successfully")
             }
 
         })
@@ -87,16 +86,16 @@ class ExercicioDaoRemoto {
                 exercicioRemoto.weight
         )
 
-        call.enqueue(object: Callback<ExercicioRemoto> {
-            override fun onFailure(call: Call<ExercicioRemoto>?,
+        call.enqueue(object: Callback<String> {
+            override fun onFailure(call: Call<String>?,
                                    t: Throwable?) {
                 inserirAtualizarExercicioListener?.onInserirAtualizarExercicioError("Deu Ruim!")
             }
 
-            override fun onResponse(call: Call<ExercicioRemoto>?,
-                                    response: Response<ExercicioRemoto>?) {
-                var exercicioRemoto: ExercicioRemoto = response?.body()!!
-                inserirAtualizarExercicioListener?.onInserirAtualizarExercicioReturn(exercicioRemoto.toExercicio())
+            override fun onResponse(call: Call<String>?,
+                                    response: Response<String>?) {
+                var msg: String = response?.body()!!
+                inserirAtualizarExercicioListener?.onInserirAtualizarExercicioReturn(msg)
             }
 
         })

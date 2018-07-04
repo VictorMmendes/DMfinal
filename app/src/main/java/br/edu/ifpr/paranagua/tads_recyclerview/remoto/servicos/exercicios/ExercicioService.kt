@@ -8,16 +8,16 @@ interface ExercicioService {
     @GET("exercicios.json")
     fun buscaTodos(): Call<List<ExercicioRemoto>>
 
-    @POST("exercicios.json")
+    @GET("insert.json/{description}&{repeats}&{weight}")
     fun inserir(
-                @Query("animal[description]") description: String,
-                @Query("animal[repeats]") repeats: String,
-                @Query("animal[weight]") weight: Int): Call<ExercicioRemoto>
+            @Path("description") description: String,
+            @Path("repeats") repeats: String,
+            @Path("weight") weight: Int): Call<String>
 
     @PATCH("exercicios/{id}.json")
     fun atualizar(
             @Path("id") id: Int,
-            @Query("animal[description]") description: String,
-            @Query("animal[repeats]") repeats: String,
-            @Query("animal[weight]") weight: Int): Call<ExercicioRemoto>
+            @Query("description") description: String,
+            @Query("repeats") repeats: String,
+            @Query("weight") weight: Int): Call<String>
 }
