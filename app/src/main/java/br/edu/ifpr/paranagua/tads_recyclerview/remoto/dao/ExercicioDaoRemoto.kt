@@ -3,6 +3,7 @@ package br.edu.ifpr.paranagua.tads_recyclerview.remoto.dao
 import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Exercicio
 import br.edu.ifpr.paranagua.tads_recyclerview.remoto.entidades.ExercicioRemoto
 import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.exercicios.BuscaTodosExerciciosListener
+import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.exercicios.DeleteExercicioListener
 import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.exercicios.ExercicioService
 import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.exercicios.InserirAtualizarExercicioListener
 import retrofit2.Call
@@ -14,6 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ExercicioDaoRemoto {
     var buscaTodosExerciciosListener: BuscaTodosExerciciosListener? = null
     var inserirAtualizarExercicioListener: InserirAtualizarExercicioListener? = null
+    var deleteExercicioListener: DeleteExercicioListener? = null
 
     private var retrofit = Retrofit.Builder()
             .baseUrl("http://192.168.0.113/slimAndroid/rest.php/")
@@ -74,7 +76,6 @@ class ExercicioDaoRemoto {
 
             override fun onResponse(call: Call<String>?,
                                     response: Response<String>?) {
-//                inserirAtualizarExercicioListener?.onInserirAtualizarExercicioReturn(exercicioRemoto.toExercicio())
                 inserirAtualizarExercicioListener?.onInserirAtualizarExercicioReturn("Registered successfully")
             }
 
@@ -109,5 +110,25 @@ class ExercicioDaoRemoto {
         })
     }
 
+    fun delete(id: Int?) {
+        var service =
+                retrofit.create(ExercicioService::class.java)
 
+        var call = service.deletar(
+                id
+        )
+
+        call.enqueue(object: Callback<String> {
+            override fun onFailure(call: Call<String>?,
+                                   t: Throwable?) {
+                deleteExercicioListener?.onDeleteExercicioError("Connection couldn't be established")
+            }
+
+            override fun onResponse(call: Call<String>?,
+                                    response: Response<String>?) {
+                deleteExercicioListener?.onDeleteExercicioReturn("Deleted successfully")
+            }
+
+        })
+    }
 }

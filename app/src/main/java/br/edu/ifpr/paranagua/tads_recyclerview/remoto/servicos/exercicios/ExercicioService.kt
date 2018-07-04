@@ -14,6 +14,10 @@ interface ExercicioService {
             @Path("repeats") repeats: String,
             @Path("weight") weight: Int): Call<String>
 
+    @GET("delete.json/{id}")
+    fun deletar(
+            @Path("id") id: Int?): Call<String>
+
     @PATCH("exercicios/{id}.json")
     fun atualizar(
             @Path("id") id: Int,

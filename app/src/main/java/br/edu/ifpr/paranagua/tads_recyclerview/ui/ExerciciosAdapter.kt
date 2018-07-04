@@ -15,6 +15,7 @@ class ExerciciosAdapter(val exercicios: List<Exercicio>, val listener: Exercicio
 
     interface ExerciciosAdapterListener {
         fun onExercicioSelected(exercicio: Exercicio)
+        fun onExercicioDeleted(id: Int?)
     }
 
     override fun onCreateViewHolder(
@@ -48,12 +49,11 @@ class ExerciciosAdapter(val exercicios: List<Exercicio>, val listener: Exercicio
             itemView.txtPeso.text = "${exercicio?.peso.toString() + "Kg"}"
 
             itemView.setOnClickListener {
-//                val intent = Intent(context, FormActivity::class.java)
-//                intent.putExtra("id", exercicio.id)
-//                TODO("TERMINAR")
-//                context?.startActivity(intent)
-
                 listener?.onExercicioSelected(exercicio)
+            }
+
+            itemView.deleteBt.setOnClickListener {
+                listener?.onExercicioDeleted(exercicio.id)
             }
         }
     }

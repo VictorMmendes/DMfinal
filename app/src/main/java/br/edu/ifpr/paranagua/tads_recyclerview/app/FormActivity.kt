@@ -34,8 +34,6 @@ class FormActivity : AppCompatActivity(), InserirAtualizarExercicioListener {
                     txtPeso.text.toString().toInt()
             )
 
-            Toast.makeText(this, "aqui", Toast.LENGTH_SHORT).show()
-
             val dao = ExercicioDaoRemoto()
             dao.inserirAtualizarExercicioListener = this
             dao.inserir(exercicio)

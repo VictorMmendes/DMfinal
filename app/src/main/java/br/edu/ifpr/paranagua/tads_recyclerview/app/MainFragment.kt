@@ -14,11 +14,29 @@ import br.edu.ifpr.paranagua.tads_recyclerview.R
 import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Exercicio
 import br.edu.ifpr.paranagua.tads_recyclerview.remoto.dao.ExercicioDaoRemoto
 import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.exercicios.BuscaTodosExerciciosListener
+import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.exercicios.DeleteExercicioListener
 import br.edu.ifpr.paranagua.tads_recyclerview.ui.ExerciciosAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
-class MainFragment : Fragment(), BuscaTodosExerciciosListener, ExerciciosAdapter.ExerciciosAdapterListener, SearchView.OnQueryTextListener {
+class MainFragment : Fragment(), BuscaTodosExerciciosListener, ExerciciosAdapter.ExerciciosAdapterListener, SearchView.OnQueryTextListener, DeleteExercicioListener {
+    override fun onDeleteExercicioReturn(str: String)
+    {
+        carregarAnimais("")
+    }
+
+    override fun onDeleteExercicioError(mensagem: String)
+    {
+        Toast.makeText(context, "ERRO: $mensagem", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onExercicioDeleted(id: Int?)
+    {
+        var dao = ExercicioDaoRemoto()
+        dao.deleteExercicioListener = this
+        dao.delete(id)
+    }
+
     override fun onQueryTextSubmit(p0: String?): Boolean
     {
         val searchString = "%${searchTf.query}%"
