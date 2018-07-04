@@ -40,6 +40,10 @@ class MainFragment : Fragment(), BuscaTodosExerciciosListener, ExerciciosAdapter
                 LinearLayoutManager.VERTICAL, false)
         view.listExercicios.layoutManager = layout
 
+        view.addBt.setOnClickListener({
+            listener?.onAddBtClicked()
+        })
+
         carregarAnimais()
 
         return view
@@ -65,6 +69,7 @@ class MainFragment : Fragment(), BuscaTodosExerciciosListener, ExerciciosAdapter
 
     interface MainFragmentListener {
         fun onExercicioSelected(exercicio: Exercicio)
+        fun onAddBtClicked()
     }
 
     companion object {

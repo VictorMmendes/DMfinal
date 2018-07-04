@@ -1,6 +1,5 @@
 package br.edu.ifpr.paranagua.tads_recyclerview.remoto.dao
 
-import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Exercicio
 import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Modificacao
 import br.edu.ifpr.paranagua.tads_recyclerview.entidades.ModificacaoRemota
 import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.exercicios.*
@@ -15,7 +14,7 @@ class ModificacaoDaoRemoto {
     var inserirAtualizarModificacaoListener: InserirAtualizarModificacaoListener? = null
 
     private var retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.0.110/slim/rest.php/")
+            .baseUrl("http://192.168.0.113/slimAndroid/rest.php/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -72,7 +71,7 @@ class ModificacaoDaoRemoto {
         })
     }
 
-    fun atualizar(exercicio: Exercicio) {
+//    fun atualizar(exercicio: Exercicio) {
 //        var service =
 //                retrofit.create(ModificacaoService::class.java)
 //
@@ -98,7 +97,7 @@ class ModificacaoDaoRemoto {
 //            }
 //
 //        })
-    }
+//    }
 
 
 }

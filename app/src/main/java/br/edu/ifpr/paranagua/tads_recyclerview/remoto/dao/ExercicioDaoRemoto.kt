@@ -16,7 +16,7 @@ class ExercicioDaoRemoto {
     var inserirAtualizarExercicioListener: InserirAtualizarExercicioListener? = null
 
     private var retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.0.110/slim/rest.php/")
+            .baseUrl("http://192.168.0.113/slimAndroid/rest.php/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -66,8 +66,9 @@ class ExercicioDaoRemoto {
 
             override fun onResponse(call: Call<ExercicioRemoto>?,
                                     response: Response<ExercicioRemoto>?) {
-                var exercicioRemoto: ExercicioRemoto = response?.body()!!
-                inserirAtualizarExercicioListener?.onInserirAtualizarExercicioReturn(exercicioRemoto.toExercicio())
+                var exercicioRemoto = response?.body()!!
+//                inserirAtualizarExercicioListener?.onInserirAtualizarExercicioReturn(exercicioRemoto.toExercicio())
+                inserirAtualizarExercicioListener?.onInserirAtualizarExercicioError("ate que deu")
             }
 
         })
