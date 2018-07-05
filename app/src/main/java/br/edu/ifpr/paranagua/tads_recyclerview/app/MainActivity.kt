@@ -25,16 +25,24 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentListener {
             t.replace(R.id.frameMain, fragment)
             t.addToBackStack(null)
         }
+        isHomeActive = false
 
         t.commit()
     }
 
     override fun onBackPressed() {
-        Toast.makeText(this, "oio", Toast.LENGTH_SHORT).show()
-//        moveTaskToBack(true)
+        if(isLandscape())
+        {
+            moveTaskToBack(true)
+        } else if(isHomeActive){
+            moveTaskToBack(true)
+        } else {
+            super.onBackPressed()
+        }
     }
 
     private fun isLandscape() = resources.getBoolean(R.bool.landscape)
+    private var isHomeActive = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +53,6 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentListener {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.frameMain, fragment)
                 .commit()
+        isHomeActive = true
     }
-
-
 }
