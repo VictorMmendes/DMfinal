@@ -33,12 +33,12 @@ class MainFragment : Fragment(), BuscaTodosExerciciosListener, ExerciciosAdapter
 
     override fun onDeleteExercicioReturn(str: String)
     {
-        carregarAnimais("")
+        carregarExercicios("")
     }
 
     override fun onDeleteExercicioError(mensagem: String)
     {
-        Toast.makeText(context, "ERRO: $mensagem", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "ERROR: $mensagem", Toast.LENGTH_SHORT).show()
     }
 
     override fun onExercicioDeleted(id: Int?)
@@ -51,13 +51,13 @@ class MainFragment : Fragment(), BuscaTodosExerciciosListener, ExerciciosAdapter
     override fun onQueryTextSubmit(p0: String?): Boolean
     {
         val searchString = "%${searchTf.query}%"
-        return carregarAnimais(searchString)
+        return carregarExercicios(searchString)
     }
 
     override fun onQueryTextChange(p0: String?): Boolean
     {
         val searchString = "%${searchTf.query}%"
-        return carregarAnimais(searchString)
+        return carregarExercicios(searchString)
     }
 
     override fun onExercicioSelected(exercicio: Exercicio) {
@@ -88,7 +88,7 @@ class MainFragment : Fragment(), BuscaTodosExerciciosListener, ExerciciosAdapter
             listener?.onAddBtClicked()
         })
 
-        carregarAnimais("")
+        carregarExercicios("")
 
         return view
     }
@@ -96,7 +96,7 @@ class MainFragment : Fragment(), BuscaTodosExerciciosListener, ExerciciosAdapter
     override fun onResume()
     {
         super.onResume()
-        carregarAnimais("")
+        carregarExercicios("")
     }
 
     override fun onAttach(context: Context) {
@@ -123,7 +123,7 @@ class MainFragment : Fragment(), BuscaTodosExerciciosListener, ExerciciosAdapter
         fun newInstance() = MainFragment()
     }
 
-    private fun carregarAnimais(query: String): Boolean {
+    private fun carregarExercicios(query: String): Boolean {
         var dao = ExercicioDaoRemoto()
         dao.buscaTodosExerciciosListener = this
         dao.buscarTodos(query)

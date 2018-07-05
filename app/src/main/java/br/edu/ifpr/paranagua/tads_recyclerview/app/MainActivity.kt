@@ -3,6 +3,7 @@ package br.edu.ifpr.paranagua.tads_recyclerview.app
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import br.edu.ifpr.paranagua.tads_recyclerview.R
 import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Exercicio
 
@@ -28,6 +29,11 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentListener {
         t.commit()
     }
 
+    override fun onBackPressed() {
+        Toast.makeText(this, "oio", Toast.LENGTH_SHORT).show()
+//        moveTaskToBack(true)
+    }
+
     private fun isLandscape() = resources.getBoolean(R.bool.landscape)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +45,7 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentListener {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.frameMain, fragment)
                 .commit()
-
     }
+
+
 }

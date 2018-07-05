@@ -32,8 +32,11 @@ class FormActivity : AppCompatActivity(), InserirAtualizarExercicioListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form)
 
-        if(intent.extras.get("id") != null)
+        label.text = "Cadastrar"
+
+        if(intent.extras.get("id") != 0)
         {
+            label.text = "Editar"
             val extras = intent.extras
             val series = extras.get("repeticao").toString().split("x")
 

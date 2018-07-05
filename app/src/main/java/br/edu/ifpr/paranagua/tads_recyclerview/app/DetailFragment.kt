@@ -13,14 +13,34 @@ import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Exercicio
 import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Modificacao
 import br.edu.ifpr.paranagua.tads_recyclerview.remoto.dao.ModificacaoDaoRemoto
 import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.exercicios.BuscaTodasModificacoesListener
+import br.edu.ifpr.paranagua.tads_recyclerview.remoto.servicos.exercicios.modificacoes.DeletarModificacaoListener
+import br.edu.ifpr.paranagua.tads_recyclerview.ui.ExerciciosAdapter
 import br.edu.ifpr.paranagua.tads_recyclerview.ui.ModificacoesAdapter
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.fragment_detail.view.*
-import java.text.SimpleDateFormat
 
 private const val ARG_EXERCICIO = "exercicio"
 
-class DetailFragment : Fragment(), BuscaTodasModificacoesListener, ModificacoesAdapter.ModificacoesAdapterListener {
+class DetailFragment : Fragment(), BuscaTodasModificacoesListener, ModificacoesAdapter.ModificacoesAdapterListener, DeletarModificacaoListener  {
+
+    override fun onDeletarModificacaoReturn(str: String)
+    {
+        Toast.makeText(context, "$str", Toast.LENGTH_SHORT).show()
+        carregarModificacoes()
+    }
+
+    override fun onDeletarModificacaoError(mensagem: String)
+    {
+        Toast.makeText(context, "ERROR: $mensagem", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDeleteModificacaoSelected(id: Int?)
+    {
+        var dao = ModificacaoDaoRemoto()
+        dao.deletarModificacaoListener = this
+        dao.deletar(id)
+    }
+
     override fun onModificacaoSelected(modificacao: Modificacao)
     {
 
@@ -29,6 +49,20 @@ class DetailFragment : Fragment(), BuscaTodasModificacoesListener, ModificacoesA
     override fun onBuscaTodasModificacoesReturn(modificacoes: List<Modificacao>)
     {
         listModificacoes?.adapter = ModificacoesAdapter(modificacoes, this)
+        var progress = 0
+        if(modificacoes.isNotEmpty())
+        {
+            var i = modificacoes.size-1
+            while(i > 0)
+            {
+                progress += modificacoes[i].peso - modificacoes[i-1].peso
+                i--
+            }
+        } else {
+            view!!.textPeso.text = "0Kg"
+        }
+
+        view!!.txtProgress.text = progress.toString()
     }
 
     override fun onBuscaTodasModificacoesError(mensagem: String)
@@ -58,7 +92,6 @@ class DetailFragment : Fragment(), BuscaTodasModificacoesListener, ModificacoesA
         view.listModificacoes.layoutManager = layout
 
         carregarModificacoes()
-
         return view
     }
 

@@ -16,6 +16,7 @@ class ModificacoesAdapter(val modificacoes: List<Modificacao>, val listener: Mod
 
     interface ModificacoesAdapterListener {
         fun onModificacaoSelected(modificacao: Modificacao)
+        fun onDeleteModificacaoSelected(id: Int?)
     }
 
     override fun onCreateViewHolder(
@@ -50,12 +51,11 @@ class ModificacoesAdapter(val modificacoes: List<Modificacao>, val listener: Mod
             itemView.txtPeso.text = "${modificacao?.peso.toString() + "Kg"}"
 
             itemView.setOnClickListener {
-                //                val intent = Intent(context, FormActivity::class.java)
-//                intent.putExtra("id", exercicio.id)
-//                TODO("TERMINAR")
-//                context?.startActivity(intent)
-
                 listener?.onModificacaoSelected(modificacao)
+            }
+
+            itemView.delBt.setOnClickListener {
+                listener?.onDeleteModificacaoSelected(modificacao.id)
             }
         }
     }
