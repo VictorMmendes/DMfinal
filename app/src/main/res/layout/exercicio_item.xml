@@ -38,8 +38,8 @@
 
         <Button
             android:id="@+id/deleteBt"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
@@ -48,8 +48,8 @@
 
         <Button
             android:id="@+id/editBt"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="50dp"
             android:background="@drawable/pencil"/>

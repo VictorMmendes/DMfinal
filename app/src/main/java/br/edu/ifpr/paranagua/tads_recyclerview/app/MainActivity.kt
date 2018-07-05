@@ -3,7 +3,6 @@ package br.edu.ifpr.paranagua.tads_recyclerview.app
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import br.edu.ifpr.paranagua.tads_recyclerview.R
 import br.edu.ifpr.paranagua.tads_recyclerview.entidades.Exercicio
 
@@ -53,6 +52,11 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentListener {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.frameMain, fragment)
                 .commit()
+        isHomeActive = true
+    }
+
+    override fun onResume() {
+        super.onResume()
         isHomeActive = true
     }
 }

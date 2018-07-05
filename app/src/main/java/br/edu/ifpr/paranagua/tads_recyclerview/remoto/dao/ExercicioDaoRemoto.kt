@@ -18,7 +18,7 @@ class ExercicioDaoRemoto {
     var deleteExercicioListener: DeleteExercicioListener? = null
 
     private var retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.0.113/slimAndroid/rest.php/")
+            .baseUrl("http://10.0.2.2/slimAndroid/rest.php/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
