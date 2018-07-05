@@ -13,6 +13,11 @@ import kotlinx.android.synthetic.main.activity_form.*
 class FormActivity : AppCompatActivity(), InserirAtualizarExercicioListener {
     override fun onInserirAtualizarExercicioReturn(str: String) {
         Toast.makeText(this, "$str", Toast.LENGTH_SHORT).show()
+        backHome()
+    }
+
+    private fun backHome()
+    {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
@@ -26,17 +31,34 @@ class FormActivity : AppCompatActivity(), InserirAtualizarExercicioListener {
         setContentView(R.layout.activity_form)
 
         btSalvar.setOnClickListener({
-
-            val exercicio = Exercicio(
-                    null,
-                    txtDescricao.text.toString(),
-                    txtRepeticao.text.toString(),
-                    txtPeso.text.toString().toInt()
-            )
-
-            val dao = ExercicioDaoRemoto()
-            dao.inserirAtualizarExercicioListener = this
-            dao.inserir(exercicio)
+            if(txtDescricao.text.toString().isBlank())
+            {
+                Toast.makeText(this, "Preencha o campo descrição", Toast.LENGTH_SHORT).show()
+            } else if(txtPeso.text.toString().isBlank()){
+                Toast.makeText(this, "Preencha o campo Peso", Toast.LENGTH_SHORT).show()
+            } else {
+                salvar()
+            }
         })
+
+        cancelarBt.setOnClickListener{
+            backHome()
+        }
+    }
+
+    fun salvar()
+    {
+        var repeticao = "${txtSerie.selectedItem.toString() + "x" + txtRepeticao.selectedItem.toString()}"
+
+        val exercicio = Exercicio(
+                null,
+                txtDescricao.text.toString(),
+                repeticao,
+                txtPeso.text.toString().toInt()
+        )
+
+        val dao = ExercicioDaoRemoto()
+        dao.inserirAtualizarExercicioListener = this
+        dao.inserir(exercicio)
     }
 }

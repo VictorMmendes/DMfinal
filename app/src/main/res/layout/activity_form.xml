@@ -23,6 +23,8 @@
         android:layout_below="@+id/descricao"
         android:ems="10"
         android:inputType="text"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
         android:layout_marginTop="20dp"
         android:hint=" Descreva o exercício" />
 
@@ -35,16 +37,39 @@
         android:layout_marginTop="20dp"
         android:text="Repetições" />
 
-    <EditText
+    <Spinner
+    android:id="@+id/txtSerie"
+    android:layout_width="match_parent"
+    android:layout_height="34dp"
+    android:textSize="12sp"
+    android:layout_alignParentStart="true"
+    android:layout_below="@+id/textView8"
+        android:entries="@array/array_serie"
+    android:layout_marginLeft="60dp"
+    android:layout_marginRight="210dp"
+    android:layout_marginTop="20dp" />
+
+    <Spinner
         android:id="@+id/txtRepeticao"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="34dp"
+        android:textSize="12sp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView8"
-        android:ems="10"
-        android:inputType="text"
-        android:layout_marginTop="20dp"
-        android:hint=" Descreva o exercício" />
+        android:layout_marginLeft="210dp"
+        android:entries="@array/array_repeticao"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/textX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView8"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="X" />
 
     <TextView
         android:id="@+id/textView9"
@@ -62,16 +87,29 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView9"
         android:ems="10"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
         android:inputType="number"
         android:layout_marginTop="20dp"
         android:hint=" Digite a quantidade de peso"/>
 
     <Button
         android:id="@+id/btSalvar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_below="@+id/txtPeso"
-        android:layout_marginTop="20dp"
-        android:text="Salvar" />
+        android:layout_marginTop="63dp"
+        android:layout_toEndOf="@+id/textView9"
+        android:layout_toRightOf="@+id/textView9"
+        android:background="@drawable/checked" />
+
+    <Button
+        android:id="@+id/cancelarBt"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/txtPeso"
+        android:layout_marginTop="63dp"
+        android:layout_toStartOf="@+id/textView9"
+        android:layout_toLeftOf="@+id/textView9"
+        android:background="@drawable/x" />
 </RelativeLayout>
