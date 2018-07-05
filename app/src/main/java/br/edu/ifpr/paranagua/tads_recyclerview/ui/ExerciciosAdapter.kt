@@ -16,6 +16,7 @@ class ExerciciosAdapter(val exercicios: List<Exercicio>, val listener: Exercicio
     interface ExerciciosAdapterListener {
         fun onExercicioSelected(exercicio: Exercicio)
         fun onExercicioDeleted(id: Int?)
+        fun onEditExercicioSelected(exercicio: Exercicio)
     }
 
     override fun onCreateViewHolder(
@@ -54,6 +55,10 @@ class ExerciciosAdapter(val exercicios: List<Exercicio>, val listener: Exercicio
 
             itemView.deleteBt.setOnClickListener {
                 listener?.onExercicioDeleted(exercicio.id)
+            }
+
+            itemView.editBt.setOnClickListener {
+                listener?.onEditExercicioSelected(exercicio)
             }
         }
     }

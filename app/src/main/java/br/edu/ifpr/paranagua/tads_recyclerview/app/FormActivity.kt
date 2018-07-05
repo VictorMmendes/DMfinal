@@ -26,9 +26,23 @@ class FormActivity : AppCompatActivity(), InserirAtualizarExercicioListener {
         Toast.makeText(this, "$mensagem", Toast.LENGTH_SHORT).show()
     }
 
+    var id: Int? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form)
+
+        if(intent.extras.get("id") != null)
+        {
+            val extras = intent.extras
+            val series = extras.get("repeticao").toString().split("x")
+
+            id = extras.get("id").toString().toInt()
+            txtSerie.setSelection(series.get(0).toInt()-1)
+            txtRepeticao.setSelection(series.get(1).toInt()-1)
+            txtDescricao.setText(extras.get("descricao").toString())
+            txtPeso.setText(extras.get("peso").toString())
+        }
 
         btSalvar.setOnClickListener({
             if(txtDescricao.text.toString().isBlank())
@@ -51,7 +65,7 @@ class FormActivity : AppCompatActivity(), InserirAtualizarExercicioListener {
         var repeticao = "${txtSerie.selectedItem.toString() + "x" + txtRepeticao.selectedItem.toString()}"
 
         val exercicio = Exercicio(
-                null,
+                id,
                 txtDescricao.text.toString(),
                 repeticao,
                 txtPeso.text.toString().toInt()
@@ -59,6 +73,11 @@ class FormActivity : AppCompatActivity(), InserirAtualizarExercicioListener {
 
         val dao = ExercicioDaoRemoto()
         dao.inserirAtualizarExercicioListener = this
-        dao.inserir(exercicio)
+        if(id == null)
+        {
+            dao.inserir(exercicio)
+        } else {
+            dao.atualizar(exercicio)
+        }
     }
 }

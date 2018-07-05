@@ -38,13 +38,21 @@
 
         <Button
             android:id="@+id/deleteBt"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/trash"/>
+            android:background="@drawable/trashcan"/>
+
+        <Button
+            android:id="@+id/editBt"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/pencil"/>
 
     </RelativeLayout>
 

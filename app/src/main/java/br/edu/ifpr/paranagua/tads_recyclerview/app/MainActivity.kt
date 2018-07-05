@@ -10,6 +10,7 @@ class MainActivity : AppCompatActivity(), MainFragment.MainFragmentListener {
     override fun onAddBtClicked()
     {
         val intent = Intent(this, FormActivity::class.java)
+        intent.putExtra("id", 0)
         startActivity(intent)
     }
 

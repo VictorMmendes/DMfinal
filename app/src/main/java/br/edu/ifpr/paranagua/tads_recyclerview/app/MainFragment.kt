@@ -1,6 +1,7 @@
 package br.edu.ifpr.paranagua.tads_recyclerview.app
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -20,6 +21,16 @@ import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
 class MainFragment : Fragment(), BuscaTodosExerciciosListener, ExerciciosAdapter.ExerciciosAdapterListener, SearchView.OnQueryTextListener, DeleteExercicioListener {
+    override fun onEditExercicioSelected(exercicio: Exercicio)
+    {
+        val intent = Intent(view?.context, FormActivity::class.java)
+        intent.putExtra("id", exercicio.id)
+        intent.putExtra("descricao", exercicio.descricao)
+        intent.putExtra("repeticao", exercicio.repeticao)
+        intent.putExtra("peso", exercicio.peso)
+        startActivity(intent)
+    }
+
     override fun onDeleteExercicioReturn(str: String)
     {
         carregarAnimais("")

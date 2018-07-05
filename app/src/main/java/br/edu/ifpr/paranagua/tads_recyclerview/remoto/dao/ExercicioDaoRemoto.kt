@@ -98,13 +98,12 @@ class ExercicioDaoRemoto {
         call.enqueue(object: Callback<String> {
             override fun onFailure(call: Call<String>?,
                                    t: Throwable?) {
-                inserirAtualizarExercicioListener?.onInserirAtualizarExercicioError("Deu Ruim!")
+                inserirAtualizarExercicioListener?.onInserirAtualizarExercicioError("Connection couldn't be established!")
             }
 
             override fun onResponse(call: Call<String>?,
                                     response: Response<String>?) {
-                var msg: String = response?.body()!!
-                inserirAtualizarExercicioListener?.onInserirAtualizarExercicioReturn(msg)
+                inserirAtualizarExercicioListener?.onInserirAtualizarExercicioReturn("Saved successfully")
             }
 
         })

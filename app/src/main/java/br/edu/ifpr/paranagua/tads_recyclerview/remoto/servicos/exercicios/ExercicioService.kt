@@ -18,10 +18,10 @@ interface ExercicioService {
     fun deletar(
             @Path("id") id: Int?): Call<String>
 
-    @PATCH("exercicios/{id}.json")
+    @GET("update.json/{id}&{description}&{repeats}&{weight}")
     fun atualizar(
             @Path("id") id: Int,
-            @Query("description") description: String,
-            @Query("repeats") repeats: String,
-            @Query("weight") weight: Int): Call<String>
+            @Path("description") description: String,
+            @Path("repeats") repeats: String,
+            @Path("weight") weight: Int): Call<String>
 }
